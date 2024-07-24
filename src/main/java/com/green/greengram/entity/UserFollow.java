@@ -12,6 +12,8 @@ public class UserFollow extends CreatedAt{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userFollowId;
+
+
     //from 과 to Long 타입을 줘야할 것 같지만 객체 지향적으로 생각하면 FK는 User의 PK값이 들어가야함
 
     @ManyToOne //many가 클래스 one이 멤버필드
