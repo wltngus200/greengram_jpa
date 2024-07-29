@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 
     public int postUser(MultipartFile mf, SignUpPostReq p){
         //p.setProviderType(SignInProviderType.LOCAL/*자체 회원가입이기 때문에*/.name());//String type의 경우 .name을 적어야함
-        p.setProviderType(SignInProviderType.LOCAL/*자체 회원가입이기 때문에*/);
+        //p.setProviderType(SignInProviderType.LOCAL/*자체 회원가입이기 때문에*/);
         //암호화
         String hash=passwordEncoder.encode(p.getUpw());
         //String hash= BCrypt.hashpw(p.getUpw(),BCrypt.gensalt());
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
     }
 
     public SignInRes postSignIn(HttpServletResponse res, SignInPostReq p){
-        p.setProviderType(SignInProviderType.LOCAL.name());
+        //p.setProviderType(SignInProviderType.LOCAL.name());
         //p.setProviderType("LOCAL")와 같음
 
         // 1. 내가 시도하는 Select 2번
@@ -98,14 +98,14 @@ public class UserServiceImpl implements UserService{
 
 
         // 2. Select 1번
-
+/*
         List<UserInfo> userInfoList=mapper.getUserId(p);
-
         UserInfoRoles userInfoRoles= MyCommonUtils.convertToUserInfoRoles(userInfoList);
-
         if(userInfoRoles==null||!passwordEncoder.matches(p.getUpw(),userInfoRoles.getUpw())){
-            throw new CustomException(MemberErrorCode.INCORRECT_ID_PW/*날리고 싶은 에러*/);
+            throw new CustomException(MemberErrorCode.INCORRECT_ID_PW/*날리고 싶은 에러);
         }
+
+ */
 
         //UserDetails userDetails=new MyUserDetails(user.getUserId(),"ROLE_USER");
         MyUser myUser=MyUser.builder()
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService{
 
 
         return SignInRes.builder()
-                .userId(user.getUserId())
+                .userId(user.getUserId())  //프로필 사진 띄울때 사용 (프로필 사진 주소에 pk값이 포함됨)
                 .nm(user.getNm())
                 .pic(user.getPic())
                 .accessToken(accessToken)

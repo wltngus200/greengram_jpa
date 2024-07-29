@@ -19,7 +19,10 @@ public class UserFollowServiceImpl implements UserFollowService {
     public int postUserFollow(UserFollowReq p){
         p.setFromUserId(authenticationFacade.getLoginUserId());
         UserFollow follow=new UserFollow();
-        User fromUser=userRepository.findUserByUserId(authenticationFacade.getLoginUserId());
+        User/*Entity의 User*/ fromUser=userRepository.getReferenceById(authenticationFacade.getLoginUserId());
+
+        //??????????
+        //User fromUser=userRepository.findUserByUserId(authenticationFacade.getLoginUserId());
         User toUser=userRepository.findUserByUserId(p.getToUserId());
         follow.setFromUser(fromUser);
         follow.setToUser(toUser);

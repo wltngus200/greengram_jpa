@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long>/*Entity, PK Ty
 
     //파라미터 순서가 중요
     User findUserByProviderTypeAndUid(SignInProviderType/*Enum*/ providerType, String uid);
-    User findUserByUserId(long userId); //아니면 지워야
+    User findUserByUserId(long userId);
 }
