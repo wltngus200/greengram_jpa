@@ -35,14 +35,14 @@ public class FeedCommentServiceImpl implements FeedCommentService{
         Feed feed=feedRepository.getReferenceById(p.getFeedId());
         User user=userRepository.getReferenceById(authenticationFacade.getLoginUserId());
 
-        FeedComment fc2=repository.saveFeedComment(p.getFeedId(), p.getUserId(), p.getComment());
 
+        //아 왜 안되는데에ㅔ에에에ㅔ에에
         FeedComment fc=new FeedComment();
         fc.setFeed(feed);
         fc.setUser(user);
         fc.setComment(p.getComment());
-        repository.save(fc);
 
+        FeedComment fc2=repository.save(fc);
 
         log.info("fc equals fc2: {}", fc==fc2); // ==비교는 주소값 비교
         return fc.getFeedCommentId();
@@ -61,7 +61,6 @@ public class FeedCommentServiceImpl implements FeedCommentService{
     }
 
     public List<FeedCommentGetRes> feedCommentListGet(long feedId) {
-        List<FeedCommentGetRes> fc= repository.findFeedCommentsByFeedId(feedId);
-        return fc;
+        return mapper.feedCommentList(feedId);
     }
 }
