@@ -3,6 +3,7 @@ package com.green.greengram.feedcomment;
 import com.green.greengram.common.model.MyResponse;
 import com.green.greengram.feedcomment.model.FeedCommentDeleteReq;
 import com.green.greengram.feedcomment.model.FeedCommentGetRes;
+import com.green.greengram.feedcomment.model.FeedCommentGetResInterface;
 import com.green.greengram.feedcomment.model.FeedCommentPostReq;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,5 +17,5 @@ public interface FeedCommentController {
     //MyResponse<Long> insFeedComment(@RequestBody FeedCommentPostReq p);
     void postFeedComment(HttpServletResponse res, FeedCommentPostReq p) throws IOException;
     MyResponse<Integer> deleteFeedComment(FeedCommentDeleteReq p);
-    MyResponse<List<FeedCommentGetRes>> feedCommentListGet(long feedId);
+    MyResponse<List<FeedCommentGetResInterface>> feedCommentListGet(long feedId);
 }

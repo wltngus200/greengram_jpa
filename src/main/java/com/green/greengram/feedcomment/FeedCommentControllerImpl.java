@@ -6,6 +6,7 @@ import com.green.greengram.entity.Feed;
 import com.green.greengram.entity.FeedComment;
 import com.green.greengram.feedcomment.model.FeedCommentDeleteReq;
 import com.green.greengram.feedcomment.model.FeedCommentGetRes;
+import com.green.greengram.feedcomment.model.FeedCommentGetResInterface;
 import com.green.greengram.feedcomment.model.FeedCommentPostReq;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -60,9 +61,9 @@ public class FeedCommentControllerImpl implements FeedCommentController {
                 .build();
     }
     @GetMapping
-    public MyResponse<List<FeedCommentGetRes>> feedCommentListGet(long feedId){
-        List<FeedCommentGetRes> result=service.feedCommentListGet(feedId);
-        return MyResponse.<List<FeedCommentGetRes>>builder()
+    public MyResponse<List<FeedCommentGetResInterface>> feedCommentListGet(long feedId){
+        List<FeedCommentGetResInterface> result=service.feedCommentListGet(feedId);
+        return MyResponse.<List<FeedCommentGetResInterface>>builder()
                 .statusCode(HttpStatus.OK)
                 .resultData(result)
                 .resultMsg("ヽ(゜▽゜　)－")

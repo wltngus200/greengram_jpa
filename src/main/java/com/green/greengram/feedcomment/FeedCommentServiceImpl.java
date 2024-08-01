@@ -7,7 +7,7 @@ import com.green.greengram.exception.CustomException;
 import com.green.greengram.exception.MemberErrorCode;
 import com.green.greengram.feed.FeedRepository;
 import com.green.greengram.feedcomment.model.FeedCommentDeleteReq;
-import com.green.greengram.feedcomment.model.FeedCommentGetRes;
+import com.green.greengram.feedcomment.model.FeedCommentGetResInterface;
 import com.green.greengram.feedcomment.model.FeedCommentPostReq;
 import com.green.greengram.security.AuthenticationFacade;
 import com.green.greengram.user.UserRepository;
@@ -36,7 +36,6 @@ public class FeedCommentServiceImpl implements FeedCommentService{
         User user=userRepository.getReferenceById(authenticationFacade.getLoginUserId());
 
 
-        //아 왜 안되는데에ㅔ에에에ㅔ에에
         FeedComment fc=new FeedComment();
         fc.setFeed(feed);
         fc.setUser(user);
@@ -60,7 +59,8 @@ public class FeedCommentServiceImpl implements FeedCommentService{
         return 1;
     }
 
-    public List<FeedCommentGetRes> feedCommentListGet(long feedId) {
-        return mapper.feedCommentList(feedId);
+    @Override
+    public List<FeedCommentGetResInterface> feedCommentListGet(long feedId) {
+        return repository.findAllByFeedCommentLimit3AndInfinity(feedId);
     }
 }
