@@ -5,19 +5,41 @@ import com.green.greengram.user.model.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
-
+@Getter
+@Setter
+class Test{
+    private String uid;
+    private String upw;
+    private String nm;
+}
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/user")
 public class UserControllerImpl {
     private final UserServiceImpl service;
+
+    @GetMapping("test")
+    public void getTest(HttpServletResponse res, @ModelAttribute Test test) throws IOException {
+        log.info("test: {}", test);
+        res.sendRedirect("https://www.naver.com");
+    }
+    @PostMapping("test")
+    public void postTest(HttpServletResponse res, @ModelAttribute Test test) throws IOException{
+        log.info("test: {}", test);
+        res.sendRedirect("https://www.naver.com");
+    }
 
     @PostMapping("sign-up")
     public MyResponse<Integer> postUser(@RequestPart(required = false) MultipartFile mf, @RequestPart SignUpPostReq p){
